@@ -24,7 +24,7 @@
     <a href="home.html"> <i class="fas fa-home"></i> <span>home</span> </a>
     <a href="about.html"> <i class="fas fa-user"></i> <span>about</span> </a>
     <a href="portfolio.html"> <i class="fas fa-briefcase"></i> <span>portfolio</span> </a>
-    <a href="blogs.html"> <i class="fas fa-blog"></i> <span>blogs</span> </a>
+    <a href="quotes.html"> <i class="fas fa-star"></i> <span>quotes</span> </a>
     <a href="contact.html"> <i class="fas fa-address-book"></i> <span>contact</span> </a>
 </nav>
 
@@ -36,13 +36,32 @@
 
     <div class="image">
         <img src="images/Aung.png" alt="">
+
+         <!-- Floting text animation -->
+         <div id="contain">
+            <div class="steam" id="steam1">Aung</div>
+            <div class="steam" id="steam2">Naing</div>
+            <div class="steam" id="steam3">Phyo</div>
+            <div class="steam" id="steam4">{Developer}</div>
+         </div>
     </div>
 
+
     <div class="content">
+       
         <h3>hi, i am Aung Naing Phyo</h3>
         <span>Senior Web developer</span>
         <p>Experienced with all stages of the development cycle for dynamic web projects.</p>
+
         <a href="about.html" class="btn"> about me <i class="fas fa-user"></i> </a>
+
+            <!-- Text Auto Type  -->
+            <div id="container">
+                <div id="text">
+                    <div id="cursor"></div>
+                </div>
+            </div>
+
     </div>
 
 </section>
@@ -51,6 +70,61 @@
 
 
 <script src="js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Type Js  -->
+<script>
+
+ var content = ["Never give up."];
+
+ var part = 0;
+
+ var partIndex = 0;
+
+ var interVal;
+
+ var element = document.querySelector("#text");
+
+ var cursor = document.querySelector("#cursor");
+
+ function type(){
+     var text = content[part].substring(0,partIndex + 1);
+     element.innerHTML = text;
+     partIndex++;
+
+     if(text === content[part]){
+         cursor.style.display = "none";
+
+         clearInterval (interVal);
+
+         setTimeout(function(){
+             interVal = setInterval(deleteTxt, 50);
+         },1000);
+     }
+ }
+
+ //Implements deleting effect
+ function deleteTxt(){
+     var text = content[part].substring(0,partIndex -1);
+     element.innerHTML = text;
+     partIndex--;
+
+     if (text ===''){
+         clearInterval(interVal);
+         if(part == (content.length - 1)) part = 0;
+         else part++;
+         partIndex = 0;
+
+        
+         setTimeout(function(){
+             cursor.style.display = "inline-block";
+             interVal = setInterval(type,100);
+         }, 200);
+     }
+
+ }
+ interVal = setInterval(type, 100);
+</script>
 
 </body>
 </html>
